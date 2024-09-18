@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import * as C from './App.styles';
 import { Item } from './@types/Item'
 import { items } from './data/items';
-import { Category } from './@types/Category'
 import { categories } from './data/categories';
 import { filterListByMonth, getCurrentMonth } from './helpers/dateFilter';
 import { TableArea } from './components/TableArea';
@@ -15,6 +14,17 @@ const App = () => {
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth())
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
+  const [inEdition, setInEdition] = useState<any>({});
+
+  const handleRemoveItem = (index: number) => {
+    let newList = [...list];
+    newList.splice(index, 1);
+    setList(newList);
+  }
+  const handleUpdateItem = (index: number, values: Item) => {
+    console.log(values)
+    setInEdition({ index, values })
+  }
 
   useEffect(() => {
     setFilteredList(filterListByMonth(list, currentMonth));
@@ -41,31 +51,33 @@ const App = () => {
     setCurrentMonth(newMonth);
   }
 
-  const handleAddItem = (item: Item) => {
-    let newList = [...list];
-    newList.push(item);
-    setList(newList);
+  const handleAddItem = (item: Item, isEdit?: boolean, index?: number) => {
+    if (isEdit && index !== undefined) {
+      
+      let newList = [...list];
+      newList[index] = { ...item };
+      setList(newList);
+    } else {
+      let newList = [...list];
+      newList.push(item);
+      setList(newList);
+    }
   }
 
   return (
 
     <C.Container>
-      <C.Header>
         <C.HeaderText>Gerenciador de Orçamentos</C.HeaderText>
-      </C.Header>
       <C.Body>
-        {/* Área de Informações */}
         <ShowInfoArea
           currentMonth={currentMonth}
           onMonthChange={handleMonthChange}
           income={income}
           expense={expense}
         />
-        {/* Área de Inserção */}
-        <InputArea onAdd={handleAddItem} />
+        <InputArea onAdd={handleAddItem} inEdition={inEdition}/>
 
-        {/* Tabela de Itens */}
-        <TableArea list={filteredList} />
+        <TableArea list={filteredList} onRemove={handleRemoveItem} onUpdate={handleUpdateItem}/>
       </C.Body>
 
     </C.Container>

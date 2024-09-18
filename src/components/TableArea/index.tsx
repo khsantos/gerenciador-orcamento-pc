@@ -1,12 +1,15 @@
-import * as C from './styles'
-import { Item } from '../../@types/Item' 
-import { TableItem } from '../TableItem'
+import * as C from './styles';
+import { Item } from '../../@types/Item';
+import { TableItem } from '../TableItem';
 
 type Props = {
     list: Item[]
+    onRemove: (index: number) => void
+    onUpdate: (index: number, values: Item) => void
 }
 
-export const TableArea = ({list}: Props) => {
+export const TableArea = ({ list, onRemove, onUpdate }: Props) => {
+    console.log(list)
     return (
         <C.Table>
             <thead>
@@ -17,11 +20,16 @@ export const TableArea = ({list}: Props) => {
                     <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 {list.map((item, index) => (
-                    <TableItem key={index} item={item} />
+                    <TableItem
+                        key={index}
+                        index={index}
+                        item={item}
+                        onRemove={onRemove}
+                        onUpdate={onUpdate} />
                 ))}
             </tbody>
         </C.Table>
-    )
+    );
 }

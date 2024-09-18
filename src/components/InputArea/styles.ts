@@ -42,6 +42,7 @@ export const Button = styled.button`
     cursor: pointer;
 
     &:hover {
+        opacity:0.7;
         background-color: blue;
         color: white;
     }

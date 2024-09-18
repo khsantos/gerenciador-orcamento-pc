@@ -2,7 +2,7 @@ import { Item } from "../@types/Item";
 
 export const getCurrentMonth = () => {
     let now = new Date();
-    return `${now.getFullYear()}-${now.getMonth()+1}`
+    return `${now.getFullYear()}-${now.getMonth() + 1}`
 }
 
 export const filterListByMonth = (list: Item[], date: string): Item[] => {
@@ -37,5 +37,5 @@ export const formatCurrentMonth = (currentMonth: string): string => {
 
 export const newDateAdjusted = (dateField: string) => {
     let [year, month, day] = dateField.split('-')
-    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+    return new Date(parseInt(year), parseInt(month), parseInt(day))
   }
