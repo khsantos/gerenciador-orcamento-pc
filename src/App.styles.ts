@@ -5,7 +5,8 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-    background: linear-gradient(180deg, rgba(255,255,255,1) 49%, rgba(236,236,236,1) 100%);
+    background: rgb(221,221,221);
+    background: linear-gradient(180deg, rgba(221,221,221,1) 0%, rgba(255,255,255,1) 100%);
     height: 150px;
     text-align: center;
 `;
