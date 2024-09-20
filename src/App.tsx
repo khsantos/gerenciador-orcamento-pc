@@ -10,16 +10,13 @@ const App = () => {
   return (
     <Router>
       <div>
-        {/* Rotas para as páginas */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-        {/* Div Persistente */}
         <PersistentDiv />
-        
       </div>
     </Router>
 
